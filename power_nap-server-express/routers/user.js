@@ -31,7 +31,7 @@ Router.get('/all', function(req, res){
  * @apiGroup User
  *
  * @apiParam {String} username  user's name.
- * @apiParam {String} pwd  password.
+ * @apiParam {String} pwd  user setting his password.
  *
  * @apiSuccess {Number} status 0 means ok .
  * @apiSuccess {JSON} data this user info with its mongodb _id param.
