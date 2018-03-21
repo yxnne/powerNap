@@ -1,0 +1,17 @@
+{
+  "name": "power_nap-server-express",
+  "version": "1.0.0",
+  "description": "This is the server side for power-nap app writing in express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yxnne",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.11",
+    "utility": "^1.13.1"
+  }
+}

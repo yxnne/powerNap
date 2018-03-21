@@ -1,0 +1,11 @@
+{
+	"name":"power_nap",
+	"version":"1.0.0",
+	"description":"This is Express Server Api",
+	"title":"PowerNap Express Server Api",
+	"url":"http://localhost:9093",
+	"template":{
+		"withCompare":true,
+		"withGenerator":true
+	}
+}
