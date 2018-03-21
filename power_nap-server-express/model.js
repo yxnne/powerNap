@@ -15,7 +15,8 @@ const models = {
 		'gender':{type:String},
 		'desc':{type:String},
 		'tags':{type:String},
-		'create_time':{type:Number,default:Date.now}
+		'create_time':{type:Number,default:Date.now},
+		'update_time':{type:Number,default:Date.now}
 	},
 
 	// note model definition
