@@ -20,7 +20,9 @@ const User = models.getModel('user');
  * @apiParam {String} praised_users  user ids about who praised this plan
  * @apiParam {String} relative_notes  some notes refer to this plan
  * @apiParam {String} stages  stages of this plan
- * @apiParam {Number} finish_time  finish time of this plan 
+ * @apiParam {Number} start_time  plan to start this plan time, defalut 0
+ * @apiParam {Number} plan_time  plan to end this plan time, defalut 0
+ * @apiParam {Number} finish_time  actually, finish time of this plan defalut 0
  *
  * @apiSuccess {Number} status 0 means ok .
  * @apiSuccess {JSON} data this note infomation.
@@ -97,7 +99,9 @@ Router.post('/delete', function(req, res){
  * @apiParam {String} praised_users  user ids about who praised this plan
  * @apiParam {String} relative_notes  some notes refer to this plan
  * @apiParam {String} stages  stages of this plan
- * @apiParam {Number} finish_time  finish time of this plan 
+ * @apiParam {Number} start_time  plan to start this plan time, defalut 0
+ * @apiParam {Number} plan_time  plan to end this plan time, defalut 0
+ * @apiParam {Number} finish_time  actually, finish time of this plan defalut 0
  *
  * @apiSuccess {Number} status 0 means ok .
  * @apiSuccess {JSON} data this plan infomation.

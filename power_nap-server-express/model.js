@@ -48,6 +48,8 @@ const models = {
 		'stages':{type:String},
 		'create_time':{type:Number,default:Date.now},
 		'update_time':{type:Number,default:Date.now},
+		'start_time':{type:Number,default:0},
+		'plan_time':{type:Number,default:0},
 		'finish_time':{type:Number,default:0}
 	},
 	'stage':{
@@ -60,7 +62,9 @@ const models = {
 		'stages':{type:String},
 		'create_time':{type:Number,default:Date.now},
 		'update_time':{type:Number,default:Date.now},
-		'finish_time':{type:Number,default:Date.now}
+		'start_time':{type:Number,default:0},
+		'plan_time':{type:Number,default:0},
+		'finish_time':{type:Number,default:0}
 	}
 };
 
