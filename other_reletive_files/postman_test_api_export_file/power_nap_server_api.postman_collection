@@ -1,0 +1,459 @@
+{
+	"variables": [],
+	"info": {
+		"name": "power_nap_server_api",
+		"_postman_id": "14bc79df-f6ac-9283-0adf-aed3ead5c2c1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"description": "user about api\n",
+			"item": [
+				{
+					"name": "/user/all",
+					"request": {
+						"url": "http://localhost:9093/user/all",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "all user lists"
+					},
+					"response": []
+				},
+				{
+					"name": "/user/register",
+					"request": {
+						"url": "http://localhost:9093/user/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"username\":\"jerk_test\",\n\t\t\"pwd\":\"12345\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/user/delete",
+					"request": {
+						"url": "http://localhost:9093/user/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"userid\":\"5ab2265644f04e9821352437\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/user/update",
+					"request": {
+						"url": "http://localhost:9093/user/update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"desc\":\"this is the desc\",\n\t \"userid\": \"5ab300f6eec6081f5dfde7b5\",\n\t \"gender\":\"female\",\n\t \"tags\":\"goodman--young\",\n\t \"followed_user_ids\":\"5ab22691e9f684990c939e6b\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"url": "http://localhost:9093/user/findById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userid\": \"5ab300f6eec6081f5dfde7b5\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "note",
+			"description": "",
+			"item": [
+				{
+					"name": "/note/new",
+					"request": {
+						"url": "http://localhost:9093/note/new",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userid\":\"5ab300f6eec6081f5dfde7b5\",\n\t\"title\":\"an other note2\",\n\t\"content\":\"This is the new note2222\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/note/update",
+					"request": {
+						"url": "http://localhost:9093/note/update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"noteid\":\"5ab3156f9282f37c0ca9d162\",\n\t\"content\":\"This is the new note updated ended12345 add~~~\",\n\t\"tags\":\"important--nice\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/note/delete",
+					"request": {
+						"url": "http://localhost:9093/note/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"noteid\":\"5ab312211f89546c7bd5136b\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/note/all",
+					"request": {
+						"url": "http://localhost:9093/note/all",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/note/findOneById",
+					"request": {
+						"url": "http://localhost:9093/note/findOneById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"noteid\":\"5ab3156f9282f37c0ca9d162\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/note/findAllByUserId",
+					"request": {
+						"url": "http://localhost:9093/note/findAllByUserId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userid\": \"5ab300f6eec6081f5dfde7b5\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plan",
+			"description": "",
+			"item": [
+				{
+					"name": "/plan/new",
+					"request": {
+						"url": "http://localhost:9093/plan/new",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userid\":\"5ab300f6eec6081f5dfde7b5\",\n\t\"name\":\"do homework everyday\"\n\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/plan/update",
+					"request": {
+						"url": "http://localhost:9093/plan/update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"planid\":\"5ab36954c369d8a7d9acd005\",\n\t\"name\":\"plan to test update\",\n\t\"tags\":\"important--nice\",\n\t\"finish_time\":1,\n\t\"start_time\":2,\n\t\"plan_time\":3\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/plan/delete",
+					"request": {
+						"url": "http://localhost:9093/plan/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"planid\":\"5ab369e55d6e91ac6787fa26\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/plan/all",
+					"request": {
+						"url": "http://localhost:9093/plan/all",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/plan/findOneById",
+					"request": {
+						"url": "http://localhost:9093/plan/findOneById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"planid\":\"5ab369e55d6e91ac6787fa26\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/plan/findAllByUserId",
+					"request": {
+						"url": "http://localhost:9093/plan/findAllByUserId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userid\": \"5ab300f6eec6081f5dfde7b5\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stage",
+			"description": "",
+			"item": [
+				{
+					"name": "/stage/new",
+					"request": {
+						"url": "http://localhost:9093/stage/new",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"planid\":\"5ab36954c369d8a7d9acd005\",\n\t\"name\":\"just do\"\n\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/stage/update",
+					"request": {
+						"url": "http://localhost:9093/stage/update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stageid\":\"5ab38672be29f61145c1712a\",\n\t\"name\":\"plan to test update\",\n\t\"desc\":\"important--nice\",\n\t\"finish_time\":1,\n\t\"start_time\":2,\n\t\"plan_time\":3\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/stage/delete",
+					"request": {
+						"url": "http://localhost:9093/stage/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stageid\":\"5ab38672be29f61145c1712a\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/stage/all",
+					"request": {
+						"url": "http://localhost:9093/stage/all",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/stage/findOneById",
+					"request": {
+						"url": "http://localhost:9093/stage/findOneById",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stageid\":\"5ab38690be29f61145c1712b\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/stage/findAllByPlanId",
+					"request": {
+						"url": "http://localhost:9093/stage/findAllByPlanId",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"planid\": \"5ab36954c369d8a7d9acd005\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
