@@ -102,6 +102,8 @@ Router.post('/delete', function(req, res){
  * @apiParam {String} gender  user's gender.
  * @apiParam {String} desc  user's desc.
  * @apiParam {String} tags  user's tags.
+ * @apiParam {String} watching_user_ids  the others this user is watching  .
+ * @apiParam {String} followed_user_ids  others watch this user.
  *
  * @apiSuccess {Number} status 0 means ok .
  * @apiSuccess {JSON} data this user info with its mongodb _id param and your update datas.

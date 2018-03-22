@@ -16,12 +16,21 @@ const models = {
 		'desc':{type:String},
 		'tags':{type:String},
 		'create_time':{type:Number,default:Date.now},
-		'update_time':{type:Number,default:Date.now}
+		'update_time':{type:Number,default:Date.now},
+		'watching_user_ids':{type:String},
+		'followed_user_ids':{type:String}
 	},
 
 	// note model definition
 	'note':{
-
+		'title':{type:String, require:true, default:''},
+		'public':{type:Boolean, require:true,default:true},
+		'userid':{type:String, require:true},
+		'sub_title':{type:String},
+		'content':{type:String, default:''},
+		'tags':{type:String},
+		'create_time':{type:Number,default:Date.now},
+		'update_time':{type:Number,default:Date.now}
 	},
 
 	// plan model definition
