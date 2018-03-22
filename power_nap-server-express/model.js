@@ -35,7 +35,32 @@ const models = {
 
 	// plan model definition
 	'plan':{
-
+		'name':{type:String, require:true, default:''},
+		'userid':{type:String, require:true},
+		'public':{type:Boolean, require:true,default:true},
+		'desc':{type:String},
+		'target_desc':{type:String},
+		'tags':{type:String},
+		'state':{type:String},
+		'category':{type:String},
+		'praised_users':{type:String},
+		'relative_notes':{type:String},
+		'stages':{type:String},
+		'create_time':{type:Number,default:Date.now},
+		'update_time':{type:Number,default:Date.now},
+		'finish_time':{type:Number,default:0}
+	},
+	'stage':{
+		'name':{type:String, require:true, default:''},
+		'planid':{type:String, require:true},
+		'desc':{type:String},
+		'target_desc':{type:String},
+		'state':{type:String},
+		'relative_notes':{type:String},
+		'stages':{type:String},
+		'create_time':{type:Number,default:Date.now},
+		'update_time':{type:Number,default:Date.now},
+		'finish_time':{type:Number,default:Date.now}
 	}
 };
 

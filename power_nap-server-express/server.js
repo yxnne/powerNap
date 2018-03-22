@@ -11,12 +11,14 @@ const app = express();
 
 const userRouter = require('./routers/user');
 const noteRouter = require('./routers/note');
+const planRouter = require('./routers/plan');
 
 // middlewares
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/note', noteRouter);
+app.use('/plan', planRouter);
 
 app.listen(SERVER_LISTEN_PORT, function(){
 	console.log('The Server for powerNap is started using in Express listened in port :' + SERVER_LISTEN_PORT);

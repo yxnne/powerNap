@@ -200,4 +200,4 @@ Router.get('/all', function(req, res){
 	});
 });
 
-module.exports=Router;
+module.exports = Router;
