@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+/* fix the NavBar at the Top */
+.fixed-header .am-navbar{
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+/* fix the tabbar at the bottom */
+.am-tab-bar{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
