@@ -2,6 +2,7 @@ const express = require('express');
 const models = require('../model');
 const utility = require('utility');
 const Router = express.Router();
+const _filter = {'pwd':0, '__v':0};
 
 // get User DB model
 const User = models.getModel('user');
@@ -22,6 +23,33 @@ Router.get('/all', function(req, res){
 		}else{
 			return res.json({code:1, msg:err});
 		}
+	});
+});
+
+/**
+ * @api {post} /user/login Login  user
+ * @apiName Login
+ * @apiGroup User
+ *
+ * @apiParam {String} username  user's name.
+ * @apiParam {String} pwd  user setting his password.
+ *
+ * @apiSuccess {Number} status 0 means ok .
+ * @apiSuccess {JSON} data this user info with its mongodb _id param.
+ * @apiVersion 1.0.0
+ */
+Router.post('/login', function(req, res){
+
+	const { username, pwd } = req.body;
+	User.findOne({username:username, pwd:md5(pwd)}, _filter, function(err, doc){
+		if(!doc){
+			return res.json({code:1, msg:'error in username or password!'});
+		}
+
+		// write cookie
+		res.cookie('userid', doc._id);
+		return res.json({code:0, data:doc});
+
 	});
 });
 
