@@ -13,6 +13,9 @@ import Dashboard from './container/dashboard';
 import Login from './container/login';
 import Register from './container/register';
 
+// import settings
+import './net_interceptor';
+
 // add redux debug tool reduxDevTool
 const reduxDevTool = window.__REDUX_DEVTOOLS_EXTENSION__?window.__REDUX_DEVTOOLS_EXTENSION__():f=>f;
 // make reducers in use, and middleware thunk, reduxDevTool

@@ -44,7 +44,7 @@ class Dashboard extends React.Component{
     console.log('now location is:', pathname);
 
     // make the page info to display according to the pathname
-    const pageInfoObj = pageList.find(item=>item.path == pathname);
+    const pageInfoObj = pageList.find(item=>item.path === pathname);
     const pageTitle = pageInfoObj.title;
     const navRightTools = pageInfoObj.needNavTool?[
       <Icon key="0" type="search" style={{ marginRight: '16px' }} />,

@@ -3,6 +3,11 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+/* error message style */
+.error-msg{
+  color:#f50;
+  padding-left: 10px;
+}
 /* fix the NavBar at the Top */
 .fixed-header .am-navbar{
   position: fixed;
