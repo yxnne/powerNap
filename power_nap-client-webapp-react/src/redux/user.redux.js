@@ -1,32 +1,32 @@
 // This is an redux file about User
 import axios from 'axios';
 
-
 // Define Actions
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const IN_ERROR = 'IN_ERROR';
-
+const LOAD_DATA = 'LOAD_DATA';
 
 // Initial State
 const initState = {
   isAuth:false,
   msg:'',
-  user:'',
-  //pwd:'',
-  type:''
+  username:'',
 };
 
 // reducer
 export function user(state=initState, action){
   switch (action.type){
     case LOGIN_SUCCESS:
-      return { ...state, ...action.payload, redirectTo:action.redirectTo };
+      return { ...state, ...action.payload, redirectTo:action.redirectTo, isAuth:true };
+
+    case LOAD_DATA:
+      return { ...state, ...action.payload, isAuth:true };
+
     case IN_ERROR:
       return { ...state, msg:action.msg };
 
     default:
       return {...state};
-
   }
 }
 
@@ -59,4 +59,12 @@ export function login({username, pwd}){
       }
     });
   };
+}
+
+// export bussiness loadData
+// this function is for Authority component
+// when there find a user by cookie info , set his infos here
+export function loadData(userinfo){
+  return { type:LOAD_DATA, payload:userinfo };
+
 }

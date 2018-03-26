@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser');
 
 
 // consts
@@ -17,6 +17,7 @@ const stageRouter = require('./routers/stage');
 // middlewares
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use('/user', userRouter);
 app.use('/note', noteRouter);
 app.use('/plan', planRouter);

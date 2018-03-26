@@ -9,6 +9,7 @@ import reducers from './reducers';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // import containers
+import Authority from './component/authority/authority';
 import Dashboard from './container/dashboard';
 import Login from './container/login';
 import Register from './container/register';
@@ -28,6 +29,7 @@ ReactDOM.render(
 
       <BrowserRouter>
         <div>
+          <Authority></Authority>
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

@@ -196,6 +196,31 @@ Router.post('/findById', function(req, res){
 	});
 });
 
+/**
+ * @api {post} /user/infoByCookie Find a user infomation By userid,userid is in the cookie
+ * @apiName Find A User infomation By userid
+ * @apiGroup User
+ *
+ * @apiSuccess {Number} status 0 means ok .
+ * @apiSuccess {JSON} data this user info with its mongodb _id param and your update datas.
+ * @apiVersion 1.0.0
+ */
+Router.get('/infoByCookie', function(req, res){
+	const { userid } = req.cookies;
+	if (!userid) {
+		return res.json({code:1, msg:'param userid is need'});
+	}
+
+	User.findOne({_id:userid}, function(err, doc){
+		if (err){
+			return res.json({code:1, msg:'cannot find this user '});
+		}
+
+		return res.json({code:0, data:doc});
+	});
+});
+
+
 // util function make pwd in md5 function 
 function md5(pwd){
 	const salt = '*salt*power_nap#@~~8888!';
