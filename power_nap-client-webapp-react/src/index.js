@@ -13,6 +13,8 @@ import Authority from './component/authority/authority';
 import Dashboard from './container/dashboard';
 import Login from './container/login';
 import Register from './container/register';
+import NoteEdit from './container/note_edit';
+import PlanEdit from './container/plan_edit';
 
 // import settings
 import './net_interceptor';
@@ -33,6 +35,8 @@ ReactDOM.render(
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/planedit" component={PlanEdit} />
+            <Route path="/noteedit" component={NoteEdit} />
             <Route component={Dashboard} /> {/* This line means all the other path just jump to the dashboard*/}
           </Switch>
         </div>

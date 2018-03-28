@@ -47,7 +47,7 @@ export function login({username, pwd}){
   return dispatch=>{
     axios.post('/user/login', {username, pwd})
     .then((res)=>{
-      console.log('data is => ', res)
+      // console.log('data is => ', res)
       if (res.status === 200 ) {
         if (res.data.code === 1){
           // code 1 means error in response

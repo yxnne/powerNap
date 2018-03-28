@@ -12,8 +12,16 @@ import Me from '../component/me/me'
  */
 class Dashboard extends React.Component{
 
-  render(){
+  handlePlusClick(){
+    console.log('handle click');
+    if ( this.props.location.pathname === '/notes'){
+      this.props.history.push('/noteedit');
+    }else if ( this.props.location.pathname === '/plans'){
+      this.props.history.push('/planedit');
+    }
+  }
 
+  render(){
     // Page container Objs
     const pageList = [
       {
@@ -45,10 +53,10 @@ class Dashboard extends React.Component{
 
     // make the page info to display according to the pathname
     const pageInfoObj = pageList.find(item=>item.path === pathname);
-    const pageTitle = pageInfoObj.title;
-    const navRightTools = pageInfoObj.needNavTool?[
+    const pageTitle = pageInfoObj && pageInfoObj.title?pageInfoObj.title:null;
+    const navRightTools = pageInfoObj && pageInfoObj.needNavTool?[
       <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-      <Icon key="1" type="plus" />,
+      <Icon key="1" type="plus" onClick={this.handlePlusClick.bind(this)}/>,
     ]:null;
 
     return (
