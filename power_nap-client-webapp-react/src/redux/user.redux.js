@@ -20,7 +20,7 @@ export function user(state=initState, action){
       return { ...state, ...action.payload, redirectTo:action.redirectTo, isAuth:true };
 
     case LOAD_DATA:
-      return { ...state, ...action.payload, isAuth:true };
+      return { ...state, ...action.payload, userid:action.payload._id, isAuth:true };
 
     case IN_ERROR:
       return { ...state, msg:action.msg };
