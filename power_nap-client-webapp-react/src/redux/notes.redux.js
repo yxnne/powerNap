@@ -6,7 +6,7 @@ import { Toast } from 'antd-mobile';
 const ADD_ONE = 'ADD_ONE_NOTE';
 const GET_USER_NOTES = 'GET_USER_NOTES';
 const IN_ERROR = 'IN_ERROR';
-const LOAD_NOTES = 'LOAD_NOTES';
+// const LOAD_NOTES = 'LOAD_NOTES';
 
 // Initial State
 const initState = {

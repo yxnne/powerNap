@@ -21,3 +21,14 @@ body {
   width: 100%;
   height: 50px !important;
 }
+.fixed-header .am-navbar{
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+.page-content{
+  padding:45px 5px;
+}
+.am-navbar{
+    height: 45px;
+}
