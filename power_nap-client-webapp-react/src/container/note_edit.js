@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavBar, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Toast } from 'antd-mobile';
 import { connect } from 'react-redux';
-import { addOneNote } from '../redux/notes.redux'
+import { addOneNote, updateOneNote } from '../redux/notes.redux'
 
 /**
  * NoteEdit is for One Note to Edit or just See
  */
  @connect(
-   state=>state, { addOneNote }
+   state=>state, { addOneNote, updateOneNote }
  )
 class NoteEdit extends React.Component{
 
@@ -20,9 +20,18 @@ class NoteEdit extends React.Component{
   }
   componentDidMount(){
 
-    // TODO:get Router params note id and find note in the Notes
+    // get Router params note id and find note in the Notes
     // and set it to the state
-
+    const noteid = this.props.match.params.noteid;
+    if ( noteid !== 'new') {
+      // This means to load old one
+      const theNote = this.props.notes.notes.find(i => i._id === noteid );
+      console.log("this.props.notes.notes",this.props.notes.notes);
+      this.setState({
+        title:theNote.title,
+        content:theNote.content
+      });
+    }
   }
 
   handleBackClick(){
@@ -30,13 +39,27 @@ class NoteEdit extends React.Component{
   }
 
   handleSaveClick(){
-    console.log('this.props.user.userid',this.props.user._id);
-    const noteData = {
-      userid:this.props.user._id,
-      title:this.state.title,
-      content:this.state.content
-    };
-    this.props.addOneNote(noteData);
+    //console.log('this.props.user.userid', this.props.user._id);
+    const noteid = this.props.match.params.noteid;
+    if ( noteid !== 'new' ) {
+      // update note
+      const noteData = {
+        noteid:noteid,
+        title:this.state.title,
+        content:this.state.content
+      };
+      this.props.updateOneNote(noteData);
+    } else {
+      // new note
+      const noteData = {
+        userid:this.props.user._id,
+        title:this.state.title,
+        content:this.state.content
+      };
+      this.props.addOneNote(noteData);
+    }
+
+
   }
 
   handleInfoClick(){
@@ -48,6 +71,7 @@ class NoteEdit extends React.Component{
       [key]:value
     });
   }
+
   render(){
     // if (this.props.notes.res === 0) {
     //   Toast.success('Note Saved Success ', 1);
@@ -55,6 +79,7 @@ class NoteEdit extends React.Component{
     // } else if (this.props.notes.res === 1){
     //   Toast.fail(this.props.notes.msg, 1);
     // }
+
 
     return (
       <div>

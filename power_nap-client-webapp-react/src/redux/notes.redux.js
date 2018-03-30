@@ -4,6 +4,8 @@ import { Toast } from 'antd-mobile';
 
 // Define Actions
 const ADD_ONE = 'ADD_ONE_NOTE';
+const UPDATE_ONE = 'UPDATE_ONE_NOTE';
+const DELETE_ONE = 'DELETE_ONE_NOTE';
 const GET_USER_NOTES = 'GET_USER_NOTES';
 const IN_ERROR = 'IN_ERROR';
 // const LOAD_NOTES = 'LOAD_NOTES';
@@ -19,12 +21,27 @@ export function notes(state=initState, action){
   switch (action.type) {
     case GET_USER_NOTES:
       return {...state, notes:[...notes, ...action.payload] };
+
     case ADD_ONE:
       Toast.success('Note Saved Success ', 1);
       return {...state, notes:[...notes, action.payload] };
+
+    case DELETE_ONE:
+      // Toast.success('Note Saved Success ', 1);
+      console.log('notes', notes);
+      console.log('state', state);
+      const index = state.notes.findIndex(i=>i._id === action.deletedNoteId);
+      state.notes.splice(index, 1)
+      return {...state,  };
+
+    case UPDATE_ONE:
+      Toast.success('Note Saved Success ', 1);
+      return {...state };
+
     case IN_ERROR:
       Toast.fail(action.msg, 1);
       return {...state, msg:action.msg };
+
     default:
       return {...state};
   }
@@ -40,6 +57,17 @@ function getUserNotes(data){
 function addOne(data){
   return {type:ADD_ONE, payload:data};
 }
+
+// update a note
+function updateOne(data){
+  return {type:UPDATE_ONE, payload:data};
+}
+
+// delete a note
+function deleteOne(deletedNoteId){
+  return {type:DELETE_ONE, deletedNoteId:deletedNoteId};
+}
+
 // in error
 function inError(msg){
   return { type:IN_ERROR, msg:msg };
@@ -95,4 +123,42 @@ export function addOneNote({ userid, title, content }){
       }
     });
   };
+}
+
+// export function update one
+export function updateOneNote({ noteid, title, content }){
+  return dispatch => {
+    axios.post('/note/update', { noteid, title, content })
+    .then(res=>{
+
+      if (res.status === 200 ) {
+        if (res.data.code === 1){
+          // code 1 means error in response
+          dispatch(inError(res.data.msg));
+        } else {
+          // success
+          dispatch(updateOne(res.data.data));
+        }
+      }
+    });
+  }
+}
+
+// export function delete one
+export function deleteOneNote({ noteid }){
+  return dispatch => {
+    axios.post('/note/delete', { noteid })
+    .then(res=>{
+
+      if (res.status === 200 ) {
+        if (res.data.code === 1){
+          // code 1 means error in response
+          dispatch(inError(res.data.msg));
+        } else {
+          // success
+          dispatch(deleteOne(noteid));
+        }
+      }
+    });
+  }
 }

@@ -36,7 +36,7 @@ ReactDOM.render(
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/planedit" component={PlanEdit} />
-            <Route path="/noteedit" component={NoteEdit} />
+            <Route path="/noteedit/:noteid" component={NoteEdit} />
             <Route component={Dashboard} /> {/* This line means all the other path just jump to the dashboard*/}
           </Switch>
         </div>

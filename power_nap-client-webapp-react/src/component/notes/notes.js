@@ -1,7 +1,7 @@
 import React from 'react';
 import { WingBlank } from 'antd-mobile';
 import { connect } from 'react-redux';
-import { getUserNotesById } from '../../redux/notes.redux';
+import { getUserNotesById, deleteOneNote } from '../../redux/notes.redux';
 import { getDescInfo, transferDateStamp } from '../../util/common_util';
 import CardNote from '../card_note/card_note';
 
@@ -9,7 +9,7 @@ import CardNote from '../card_note/card_note';
  * Notes, All the user's notes display
  */
  @connect(
-   state=>state, { getUserNotesById }
+   state=>state, { getUserNotesById, deleteOneNote }
  )
 class Notes extends React.Component{
 
@@ -20,10 +20,17 @@ class Notes extends React.Component{
     setTimeout(
       ()=>(
         this.props.getUserNotesById({userid:this.props.user._id})
-      ),1000
+      ),500
     );
   }
 
+  handleClickMore(noteid){
+    this.props.history.push(`/noteedit/${noteid}`);
+  }
+
+  handleDeleteClick(id){
+    this.props.deleteOneNote({noteid:id});
+  }
 
   render(){
     return (
@@ -32,6 +39,8 @@ class Notes extends React.Component{
           {
             this.props.notes.notes.map(item=>(
               <CardNote key={item._id} title={item.title}
+                handleMore={()=>{this.handleClickMore(item._id)}}
+                handleDelete={()=>{this.handleDeleteClick(item._id)}}
                 body={getDescInfo(item)}
                 footerContent={"update: "+ transferDateStamp(new Date(item.update_time))}
               />

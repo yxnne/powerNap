@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, WhiteSpace, Icon, Popover } from 'antd-mobile';
+import { Card, WhiteSpace, Icon, Popover, Modal } from 'antd-mobile';
 
 /**
  * This is an UI Component for View an Card of Note
@@ -20,6 +20,23 @@ class CardNote extends React.Component{
       visible: false,
       selected: opt.props.value,
     });
+
+    // console.log(opt.key);
+    // Do by the opt.key
+    if ( opt.key === 'delete') {
+      Modal.alert('Delete', 'Are you sure???', [
+        { text: 'Cancel', onPress: () => console.log('cancel') },
+        {
+          text: 'Ok',
+          onPress: () =>{
+            this.props.handleDelete();
+          }
+        },
+      ]);
+    } else if (opt.key === 'share'){
+
+    }
+
   };
   handleVisibleChange = (visible) => {
     this.setState({
@@ -27,14 +44,16 @@ class CardNote extends React.Component{
     });
   };
 
-  handleMore(){
-    console.log('handle more');
-  }
+  // handleMore(){
+  //   // Push to the page edit
+  //   this.props.history.push('/');
+  //
+  // }
 
   render(){
     // Card Footer Extra Popover Button
     const Item = Popover.Item;
-    const myImg = src => <img src={`https://gw.alipayobjects.com/zos/rmsportal/${src}.svg`} className="am-icon am-icon-xs" alt="" />;
+    const iconImg = src => <img src={require(`./img/${src}.svg`)} className="am-icon am-icon-xs" alt="" />;
 
     const footerExtra = (
       <Popover mask
@@ -42,11 +61,8 @@ class CardNote extends React.Component{
             overlayStyle={{ color: 'currentColor' }}
             visible={this.state.visible}
             overlay={[
-              (<Item key="4" value="scan" icon={myImg('tOtXhkIWzwotgGSeptou')} data-seed="logId">Scan</Item>),
-              (<Item key="5" value="special" icon={myImg('PKAgAqZWJVNwKsAJSmXd')} style={{ whiteSpace: 'nowrap' }}>My Qrcode</Item>),
-              (<Item key="6" value="button ct" icon={myImg('uQIYTFeRrjPELImDRrPt')}>
-                <span style={{ marginRight: 5 }}>Help</span>
-              </Item>),
+              (<Item key="share" value="scan" icon={iconImg('share')} data-seed="logId">Share</Item>),
+              (<Item key="delete" value="special" icon={iconImg('delete')} style={{ whiteSpace: 'nowrap' }}>Delete</Item>)
             ]}
             align={{
               overflow: { adjustY: 0, adjustX: 0 },
@@ -69,7 +85,7 @@ class CardNote extends React.Component{
 
             title={this.props.title}
             thumb={this.props.thumb}
-            extra={<span onClick={()=>{this.handleMore()}}>more ></span>}
+            extra={<span onClick={this.props.handleMore}>more ></span>}
           />
           <Card.Body>
             <div>{this.props.body}</div>

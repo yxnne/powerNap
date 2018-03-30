@@ -15,7 +15,7 @@ class Dashboard extends React.Component{
   handlePlusClick(){
     console.log('handle click');
     if ( this.props.location.pathname === '/notes'){
-      this.props.history.push('/noteedit');
+      this.props.history.push('/noteedit/new');
     }else if ( this.props.location.pathname === '/plans'){
       this.props.history.push('/planedit');
     }
