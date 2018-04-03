@@ -14,6 +14,13 @@ export function getDescInfo(item){
 }
 
 
+// This methods calculate the value of percent
+// and using Math.round for getting an integer
+export function getPercentValue(value, total){
+  return Math.round( value / total * 100 );
+}
+
+
 // Date from int stamp to 'Month, Day, Year'
 export function transferDateStamp(dateStamp){
   const year = dateStamp.getFullYear();

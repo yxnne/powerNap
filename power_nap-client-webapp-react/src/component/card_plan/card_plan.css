@@ -1,0 +1,11 @@
+.plan_card_container{
+   padding: 0 15px;
+}
+
+
+.plan_card_container .title_container img{
+  margin-right: 10px;
+  margin-top: 10px;
+  width:25px;
+  display: inline-block;
+}
