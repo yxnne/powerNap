@@ -22,7 +22,7 @@ body {
   height: 50px !important;
 }
 .fixed-header .am-navbar{
-  position: fixed;
+  position: fixed ;
   top:0;
   width: 100%;
 }
@@ -31,4 +31,11 @@ body {
 }
 .am-navbar{
     height: 45px;
+    position: fixed ;
+    top:0;
+    width: 100%;
+    z-index: 999;
+}
+.tab_center_coantainer{
+  margin-top: 50px;
 }

@@ -92,25 +92,28 @@ class NoteEdit extends React.Component{
             <Icon type="check" key="nav_icon_save" onClick={this.handleSaveClick.bind(this)}/>
           ]}>{ 'A Note' }</NavBar>
 
-        <WhiteSpace size='lg'/>
+        <div  className="tab_center_coantainer">
+          <WhiteSpace size='lg'/>
 
-        <List>
-          <WingBlank>
+          <List>
+            <WingBlank>
 
-            <InputItem
-              placeholder="Here is the Title"
-              value={this.state.title}
-              onChange={(v)=>{this.handleOnChange('title', v)}}
-            />
-            <TextareaItem
-              placeholder="Content here"
-              value={this.state.content}
-              onChange={(v)=>{this.handleOnChange('content', v)}}
-              rows={20}
-              count={100000}
-            />
-          </WingBlank>
-        </List>
+              <InputItem
+                placeholder="Here is the Title"
+                value={this.state.title}
+                onChange={(v)=>{this.handleOnChange('title', v)}}
+              />
+              <TextareaItem
+                placeholder="Content here"
+                value={this.state.content}
+                onChange={(v)=>{this.handleOnChange('content', v)}}
+                rows={20}
+                count={100000}
+              />
+            </WingBlank>
+          </List>
+        </div>
+
 
       </div>
     );

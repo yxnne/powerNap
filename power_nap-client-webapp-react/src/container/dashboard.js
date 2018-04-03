@@ -65,9 +65,11 @@ class Dashboard extends React.Component{
           rightContent={navRightTools}>{ pageTitle }</NavBar>
 
           <Switch>
+            <div className="tab_center_coantainer">
             {
               pageList.map(item=>(<Route key={item.path} path={item.path} component={item.component} /> ))
             }
+            </div>
           </Switch>
 
         <TabNav data={pageList} />

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Card, WhiteSpace, Icon, Popover, Modal, Progress } from 'antd-mobile';
-import { getPercentValue } from '../../util/common_util';
-
+import TimeProgressBar from '../time_progress_bar/time_progress_bar';
 import './card_plan.css';
 
-
+// Define CONSTs
 const PLAN_STATE_STARTED = 'STARTED';
 const PLAN_STATE_FINSHED = 'FINSHED';
 const PLAN_NO_START = 'NO_START';
@@ -51,12 +50,6 @@ class CardPlan extends React.Component {
     });
   };
 
-  // handleMore(){
-  //   // Push to the page edit
-  //   this.props.history.push('/');
-  //
-  // }
-
   render(){
     // Card Footer Extra Popover Button
     const Item = Popover.Item;
@@ -85,42 +78,64 @@ class CardPlan extends React.Component {
     );
 
     // Calculate the Progress
-    let progress_value = 0;
-    switch (this.props.state) {
-      case PLAN_NO_START:
-        progress_value = 0;
-        break;
-      case PLAN_STATE_STARTED:
-        const total = this.props.plan_time - this.props.start_time;
-        const current = new Date().getTime() - this.props.start_time;
-        progress_value = getPercentValue( current, total ) ;
-        break;
-      case PLAN_STATE_FINSHED:
-        progress_value = 100;
-        break;
-      default:
-        progress_value = 0;
-    }
+    const progressView = () => {
+      switch (this.props.state) {
+        case PLAN_NO_START:
+          return (
+            <Progress percent={0} position="normal" />
+          );
 
+        case PLAN_STATE_STARTED:
+          // const total = this.props.plan_time - this.props.start_time;
+          // const current = new Date().getTime() - this.props.start_time;
+          // progress_value = getPercentValue( current, total ) ;
+
+          return (
+            <TimeProgressBar planTime={this.props.plan_time}
+              startTime={this.props.start_time}
+              currentTime={new Date().getTime()}
+              position="normal" />
+          );
+
+        case PLAN_STATE_FINSHED:
+          return (
+            <Progress percent={100} position="normal" />
+          );
+
+        default:
+          return (
+            <Progress percent={0} position="normal" />
+          );
+      }
+    };
 
     return (
-
-
-
       <div>
         <WhiteSpace size="lg" />
         <Card>
           <Card.Header
-
             title={this.props.name}
             thumb={this.props.thumb}
             extra={<span onClick={this.props.handleMore}>more ></span>}
           />
-          <Progress percent={progress_value} position="normal" />
+          { progressView() }
           <Card.Body>
-            <div>{this.props.body}</div>
+            <div>
+              <p>{this.props.desc}</p>
+
+            </div>
           </Card.Body>
-          <Card.Footer content={this.props.footerContent} extra={footerExtra} />
+          <Card.Footer
+            content={(
+              <span style={{lineHeight:"130%"}}>
+                <span >
+                  <img style={{ width:"18px", marginRight:"12px" }} src={this.props.public?require('./img/open_eye.svg'):require('./img/private_lock.svg')}/>
+                </span>
+                <span >
+                  {this.props.footerContent}
+                </span>
+              </span>
+            )} extra={footerExtra} />
 
         </Card>
         <WhiteSpace size="lg" />
