@@ -1,0 +1,10 @@
+.in_time_section{
+  display: inline-block;
+}
+.out_time_section{
+  display: inline-block;
+}
+
+.out_time_section .am-progress-outer .am-progress-bar{
+  border-color: #ff4242;
+}
