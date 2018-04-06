@@ -17,7 +17,7 @@ class Dashboard extends React.Component{
     if ( this.props.location.pathname === '/notes'){
       this.props.history.push('/noteedit/new');
     }else if ( this.props.location.pathname === '/plans'){
-      this.props.history.push('/planedit');
+      this.props.history.push('/planedit/new');
     }
   }
 

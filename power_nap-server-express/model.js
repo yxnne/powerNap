@@ -37,7 +37,7 @@ const models = {
 	'plan':{
 		'name':{type:String, require:true, default:''},
 		'userid':{type:String, require:true},
-		'public':{type:Boolean, require:true,default:true},
+		'isPublic':{type:Boolean, require:true,default:true},
 		'desc':{type:String},
 		'target_desc':{type:String},
 		'tags':{type:String},

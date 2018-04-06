@@ -28,8 +28,6 @@ export function notes(state=initState, action){
 
     case DELETE_ONE:
       // Toast.success('Note Saved Success ', 1);
-      console.log('notes', notes);
-      console.log('state', state);
       const index = state.notes.findIndex(i=>i._id === action.deletedNoteId);
       state.notes.splice(index, 1)
       return {...state,  };
@@ -39,7 +37,7 @@ export function notes(state=initState, action){
       return {...state };
 
     case IN_ERROR:
-      Toast.fail(action.msg, 1);
+      Toast.fail(action.msg, 2);
       return {...state, msg:action.msg };
 
     default:
@@ -78,7 +76,7 @@ function inError(msg){
 export function getUserNotesById({ userid }){
   return dispatch => {
     if (!userid) {
-      dispatch(inError('User Not Login'));
+      // dispatch(inError('User Not Login'));
       return;
     }
 

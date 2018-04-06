@@ -12,7 +12,7 @@ class PlanStageSteps extends React.Component{
     const stepDescSection = (desc) => {
       return (
         <div>
-          <p style={{wordWrap:'break-word'}}>{desc}</p>
+          <p style={{wordWrap:'break-word',color:"#888"}}>{desc}</p>
 
           <Flex>
             <Flex.Item></Flex.Item>

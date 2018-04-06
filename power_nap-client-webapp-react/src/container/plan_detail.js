@@ -11,7 +11,7 @@ import { addOnePlan } from '../redux/plans.redux'
  @connect(
    state=>state, { addOnePlan }
  )
-class PlanEdit extends React.Component{
+class PlanDetail extends React.Component{
 
   constructor(props){
     super(props);
@@ -94,18 +94,6 @@ class PlanEdit extends React.Component{
     });
   }
 
-  // new step prompt a modal
-  // handleNewStep(){
-  //   Modal.prompt(
-  //     'Login',
-  //     'Please input login information',
-  //     (login, password) => console.log(`login: ${login}, password: ${password}`),
-  //     'login-password',
-  //     null,
-  //     ['Please input name', 'Please input password'],
-  //   );
-  // }
-
   closeModal(){
     this.setState({
       modal_add_new_visible:false
@@ -120,14 +108,6 @@ class PlanEdit extends React.Component{
   }
 
   render(){
-    // if (this.props.notes.res === 0) {
-    //   Toast.success('Note Saved Success ', 1);
-    //
-    // } else if (this.props.notes.res === 1){
-    //   Toast.fail(this.props.notes.msg, 1);
-    // }
-
-
 
 
     return (
@@ -139,7 +119,7 @@ class PlanEdit extends React.Component{
             <Icon  style={{ marginRight: '16px' }} type="ellipsis" key="nav_icon_info"
               onClick={this.handleInfoClick.bind(this)}/>,
             <Icon type="check" key="nav_icon_save" onClick={this.handleSaveClick.bind(this)}/>
-          ]}>{ 'Plan Edit' }</NavBar>
+          ]}>{ 'A Note' }</NavBar>
 
         <div  className="tab_center_coantainer">
 
@@ -227,4 +207,4 @@ class PlanEdit extends React.Component{
   }
 }
 
-export default PlanEdit;
+export default PlanDetail;

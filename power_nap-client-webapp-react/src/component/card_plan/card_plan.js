@@ -129,7 +129,7 @@ class CardPlan extends React.Component {
             content={(
               <span style={{lineHeight:"130%"}}>
                 <span >
-                  <img style={{ width:"18px", marginRight:"12px" }} src={this.props.public?require('./img/open_eye.svg'):require('./img/private_lock.svg')}/>
+                  <img style={{ width:"18px", marginRight:"12px" }} src={this.props.isPublic?require('./img/open_eye.svg'):require('./img/private_lock.svg')}/>
                 </span>
                 <span >
                   {this.props.footerContent}
