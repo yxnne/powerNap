@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { WingBlank } from 'antd-mobile';
 import PlanCard from '../card_plan/card_plan';
 import { transferDateStamp } from '../../util/common_util';
-import { getUserPlansById, deleteOneNote } from '../../redux/plans.redux'
+import { getUserPlansById, deleteOnePlan, resetRedirectFlag } from '../../redux/plans.redux'
 
 /**
  * Plans Is the Plan's List Component
  */
 @connect(
-  state=>state, { getUserPlansById, deleteOneNote }
+  state=>state, { getUserPlansById, deleteOnePlan, resetRedirectFlag }
 )
 class Plans extends React.Component {
   constructor(props) {
@@ -26,6 +26,9 @@ class Plans extends React.Component {
         this.props.getUserPlansById({userid:this.props.user._id})
       ),500
     );
+    // Reset the save ok redirect flag
+    // it is a bug recover in edit page
+    this.props.resetRedirectFlag();
   }
 
   handleClickMore(planid){
@@ -33,7 +36,7 @@ class Plans extends React.Component {
   }
 
   handleDeleteClick(id){
-    this.props.deleteOneNote({planid:id});
+    this.props.deleteOnePlan({planid:id});
   }
 
   render() {

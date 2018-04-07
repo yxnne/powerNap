@@ -8,6 +8,7 @@ const UPDATE_ONE = 'UPDATE_ONE_NOTE';
 const DELETE_ONE = 'DELETE_ONE_NOTE';
 const GET_USER_NOTES = 'GET_USER_NOTES';
 const IN_ERROR = 'IN_ERROR';
+const RESET_REDIRECT_FLAG = 'RESET_REDIRECT_FLAG';
 // const LOAD_NOTES = 'LOAD_NOTES';
 
 // Initial State
@@ -40,6 +41,9 @@ export function notes(state=initState, action){
       Toast.fail(action.msg, 2);
       return {...state, msg:action.msg };
 
+    case RESET_REDIRECT_FLAG:
+      return {...state,  okBack:false };
+
     default:
       return {...state};
   }
@@ -69,6 +73,12 @@ function deleteOne(deletedNoteId){
 // in error
 function inError(msg){
   return { type:IN_ERROR, msg:msg };
+}
+
+// reset the redirect back flag
+// This will export
+export function resetRedirectFlag(msg){
+  return { type:RESET_REDIRECT_FLAG };
 }
 
 // Export Logic Function

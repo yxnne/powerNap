@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, WhiteSpace, Icon, Popover, Modal, Progress } from 'antd-mobile';
 import TimeProgressBar from '../time_progress_bar/time_progress_bar';
+import { PLAN_RESULT_NO_START, PLAN_RESULT_STARTED, PLAN_RESULT_FINISHED } from '../../util/consts';
 import './card_plan.css';
 
 // Define CONSTs
 const PLAN_STATE_STARTED = 'STARTED';
-const PLAN_STATE_FINSHED = 'FINSHED';
+const PLAN_STATE_FINSHED = 'FINISHED';
 const PLAN_NO_START = 'NO_START';
 /**
  * This is an UI Component for View an Card of Plan
@@ -80,12 +81,12 @@ class CardPlan extends React.Component {
     // Calculate the Progress
     const progressView = () => {
       switch (this.props.state) {
-        case PLAN_NO_START:
+        case PLAN_RESULT_NO_START:
           return (
             <Progress percent={0} position="normal" />
           );
 
-        case PLAN_STATE_STARTED:
+        case PLAN_RESULT_STARTED:
           // const total = this.props.plan_time - this.props.start_time;
           // const current = new Date().getTime() - this.props.start_time;
           // progress_value = getPercentValue( current, total ) ;
@@ -97,7 +98,7 @@ class CardPlan extends React.Component {
               position="normal" />
           );
 
-        case PLAN_STATE_FINSHED:
+        case PLAN_RESULT_FINISHED:
           return (
             <Progress percent={100} position="normal" />
           );

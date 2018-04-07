@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
 import AddStageModal from '../component/add_stage_modal/add_stage_modal';
-import { addOnePlan, updateOneNote } from '../redux/plans.redux'
+import { addOnePlan, updateOnePlan } from '../redux/plans.redux'
 
 /**
  * PlanEdit is for One Plan to Edit
  */
  @connect(
-   state=>state, { addOnePlan, updateOneNote }
+   state=>state, { addOnePlan, updateOnePlan }
  )
 class PlanEdit extends React.Component{
 
@@ -89,7 +89,7 @@ class PlanEdit extends React.Component{
        plan_time:this.state.plan_time?this.state.plan_time.getTime():null,
     };
 
-    this.props.updateOneNote(updateData);
+    this.props.updateOnePlan(updateData);
   }
 
 

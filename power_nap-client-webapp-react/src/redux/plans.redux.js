@@ -8,6 +8,7 @@ const UPDATE_ONE = 'UPDATE_ONE_PLAN';
 const DELETE_ONE = 'DELETE_ONE_PLAN';
 const GET_USER_PLANS = 'GET_USER_PLANS';
 const IN_ERROR = 'IN_ERROR';
+const RESET_REDIRECT_FLAG = 'RESET_REDIRECT_FLAG';
 
 // Initial State
 const initState = {
@@ -37,6 +38,9 @@ export function plans(state=initState, action){
 
     case GET_USER_PLANS:
       return {...state, plans:[...plans, ...action.payload] };
+
+    case RESET_REDIRECT_FLAG:
+      return {...state,  okBack:false };
 
     default:
       return {...state};
@@ -69,6 +73,11 @@ function inError(msg){
   return { type:IN_ERROR, msg:msg };
 }
 
+// reset the redirect back flag
+// This will export
+export function resetRedirectFlag(msg){
+  return { type:RESET_REDIRECT_FLAG };
+}
 // Export Logic Function
 // add one plan
 export function addOnePlan({userid, name, target_desc, desc, isPublic, start_time, plan_time, state}){
@@ -130,7 +139,7 @@ export function getUserPlansById({ userid }){
 }
 
 // export function update one
-export function updateOneNote({ planid, name, target_desc, desc, isPublic, start_time, plan_time, state }){
+export function updateOnePlan({ planid, name, target_desc, desc, isPublic, start_time, plan_time, state }){
   return dispatch => {
     axios.post('/plan/update', { planid, name, target_desc, desc, isPublic, start_time, plan_time, state })
     .then(res=>{
@@ -149,7 +158,7 @@ export function updateOneNote({ planid, name, target_desc, desc, isPublic, start
 }
 
 // export function delete one
-export function deleteOneNote({ planid }){
+export function deleteOnePlan({ planid }){
   return dispatch => {
     axios.post('/plan/delete', { planid })
     .then(res=>{

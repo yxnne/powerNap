@@ -1,7 +1,7 @@
 import React from 'react';
 import { WingBlank } from 'antd-mobile';
 import { connect } from 'react-redux';
-import { getUserNotesById, deleteOneNote } from '../../redux/notes.redux';
+import { getUserNotesById, deleteOneNote, resetRedirectFlag } from '../../redux/notes.redux';
 import { getDescInfo, transferDateStamp } from '../../util/common_util';
 import CardNote from '../card_note/card_note';
 
@@ -9,7 +9,7 @@ import CardNote from '../card_note/card_note';
  * Notes, All the user's notes display
  */
  @connect(
-   state=>state, { getUserNotesById, deleteOneNote }
+   state=>state, { getUserNotesById, deleteOneNote, resetRedirectFlag }
  )
 class Notes extends React.Component{
 
@@ -22,6 +22,9 @@ class Notes extends React.Component{
         this.props.getUserNotesById({userid:this.props.user._id})
       ),500
     );
+    // Reset the save ok redirect flag
+    // it is a bug recover in edit page
+    this.props.resetRedirectFlag();
   }
 
   handleClickMore(noteid){

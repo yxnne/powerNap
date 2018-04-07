@@ -5,13 +5,13 @@ import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
 import AddStageModal from '../component/add_stage_modal/add_stage_modal';
 import TimeProgressBar from '../component/time_progress_bar/time_progress_bar';
 import PlanResult from '../component/plan_result/plan_result';
-import { addOnePlan } from '../redux/plans.redux'
-
+import { addOnePlan, updateOnePlan } from '../redux/plans.redux'
+import { PLAN_RESULT_NO_START, PLAN_RESULT_STARTED, PLAN_RESULT_FINISHED } from '../util/consts';
 /**
  * PlanEdit is for One Plan to Edit
  */
  @connect(
-   state=>state, { addOnePlan }
+   state=>state, { addOnePlan, updateOnePlan }
  )
 class PlanDetail extends React.Component{
 
@@ -28,6 +28,7 @@ class PlanDetail extends React.Component{
       modal_add_new_visible:false
     };
   }
+
   componentDidMount(){
 
     // get Router params plan id and find plan in the Notes
@@ -51,7 +52,6 @@ class PlanDetail extends React.Component{
   handleSettingClick(){
     // push the router to plan edit
     // transfer the planid as param
-    // console.log(this.props);
     this.props.history.push(`/planedit/${this.props.match.params.planid}`);
 
   }
@@ -68,12 +68,6 @@ class PlanDetail extends React.Component{
     });
   }
 
-  handleRadioClick(isPublic){
-    this.setState({
-      isPublic:isPublic
-    });
-  }
-
   closeModal(){
     this.setState({
       modal_add_new_visible:false
@@ -87,8 +81,48 @@ class PlanDetail extends React.Component{
     });
   }
 
+  handleSetPlanStateClick(){
+    switch ( this.state.state ) {
+      case PLAN_RESULT_NO_START:
+        this.updatePlan(PLAN_RESULT_STARTED);
+        break;
+      case PLAN_RESULT_STARTED:
+        this.updatePlan(PLAN_RESULT_FINISHED);
+        break;
+      case PLAN_RESULT_FINISHED:
+        this.updatePlan(PLAN_RESULT_STARTED);
+        break;
+    }
+  }
+
+  updatePlan(newState){
+    // post data
+    // Here, we don't need update the plan's state
+    const updateData = {
+       planid:this.props.match.params.planid,
+       ...this.state,
+       start_time:this.state.start_time?this.state.start_time.getTime():null,
+       plan_time:this.state.plan_time?this.state.plan_time.getTime():null,
+       state:newState
+    };
+
+    this.props.updateOnePlan(updateData);
+  }
+
   render(){
 
+    const operationButton = () => {
+      switch ( this.state.state ) {
+        case PLAN_RESULT_NO_START:
+          return (<Button style={{margin:"40px 40px"}}type="primary" size="small" onClick={()=>this.handleSetPlanStateClick()}>Set Plan Started</Button>);
+
+        case PLAN_RESULT_STARTED:
+          return (<Button style={{margin:"40px 40px"}}type="primary" size="small" onClick={()=>this.handleSetPlanStateClick()}>Set Plan Finished</Button>);
+
+        case PLAN_RESULT_FINISHED:
+          return (<Button style={{margin:"40px 40px"}}type="primary" size="small" onClick={()=>this.handleSetPlanStateClick()}>Set Plan Started</Button>);
+      }
+    };
 
     return (
       <div>
@@ -96,7 +130,7 @@ class PlanDetail extends React.Component{
           icon={<Icon type="left" />}
           onLeftClick={this.handleBackClick.bind(this)}
           rightContent={[
-              <span style={{color:'#1F90E6'}} onClick={this.handleSettingClick.bind(this)}>Stetting ></span>
+              <span key="setting" style={{color:'#1F90E6'}} onClick={this.handleSettingClick.bind(this)}>Stetting ></span>
           ]}>{ 'Plan Detail' }</NavBar>
 
         <div  className="tab_center_coantainer">
@@ -117,7 +151,7 @@ class PlanDetail extends React.Component{
             </Accordion.Panel>
             <Accordion.Panel header="Operation">
               <WingBlank>
-                <Button style={{margin:"40px 40px"}}type="primary" size="small">Set Finished</Button>
+                {operationButton()}
               </WingBlank>
             </Accordion.Panel>
 
