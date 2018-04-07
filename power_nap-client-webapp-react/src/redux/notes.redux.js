@@ -24,7 +24,7 @@ export function notes(state=initState, action){
 
     case ADD_ONE:
       Toast.success('Note Saved Success ', 1);
-      return {...state, notes:[...notes, action.payload] };
+      return {...state, notes:[...notes, action.payload], okBack:true };
 
     case DELETE_ONE:
       // Toast.success('Note Saved Success ', 1);
@@ -34,7 +34,7 @@ export function notes(state=initState, action){
 
     case UPDATE_ONE:
       Toast.success('Note Saved Success ', 1);
-      return {...state };
+      return {...state, okBack:true };
 
     case IN_ERROR:
       Toast.fail(action.msg, 2);

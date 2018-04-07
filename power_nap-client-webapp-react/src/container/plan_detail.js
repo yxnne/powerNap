@@ -1,8 +1,10 @@
 import React from 'react';
-import { Modal, NavBar, Button, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Radio, DatePicker, Steps, Toast } from 'antd-mobile';
+import { Accordion, Result, Modal, NavBar, Button, Icon,  List, WhiteSpace, WingBlank, DatePicker, Toast } from 'antd-mobile';
 import { connect } from 'react-redux';
 import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
 import AddStageModal from '../component/add_stage_modal/add_stage_modal';
+import TimeProgressBar from '../component/time_progress_bar/time_progress_bar';
+import PlanResult from '../component/plan_result/plan_result';
 import { addOnePlan } from '../redux/plans.redux'
 
 /**
@@ -31,51 +33,29 @@ class PlanDetail extends React.Component{
     // get Router params plan id and find plan in the Notes
     // and set it to the state
     const planid = this.props.match.params.planid;
-    if ( planid !== 'new') {
-      // This means to load old one
-      const theNote = this.props.plans.plans.find(i => i._id === planid );
-      // console.log("this.props.notes.notes",this.props.notes.notes);
-      this.setState({
-        // title:theNote.title,
-        // content:theNote.content
-      });
-    }
+    const showPlan = this.props.plans.plans.find(item => item._id === planid );
+    // transfer date temp
+    showPlan.start_time = new Date(showPlan.start_time);
+    showPlan.plan_time = new Date(showPlan.plan_time);
+
+    this.setState({
+      ...showPlan
+    });
+
   }
 
   handleBackClick(){
     this.props.history.push('/plans');
   }
 
-  handleSaveClick(){
-    // console.log('s_time', this.state.start_time.getTime());
-    // ask if need sart this plan now
-    if ( this.props.match.params.planid === 'new'){
-      Modal.alert('Start This Plan Now?', 'Choose Start you will make this Plan a Started State, if you Need to Start It Later, Choose The No,Thanks Button', [
-        { text: 'No,Thanks', onPress: () => {
-          this.setState({state:'NO_START'});
-          this.savePlan('NO_START');
-        }, style: 'default' },
-        { text: 'Start', onPress: () => {
-          this.setState({state:'STARTED'});
-          this.savePlan('STARTED');
-        } },
-      ]);
-    } else {
+  handleSettingClick(){
+    // push the router to plan edit
+    // transfer the planid as param
+    // console.log(this.props);
+    this.props.history.push(`/planedit/${this.props.match.params.planid}`);
 
-    }
   }
-  savePlan(state){
-    // post data
-    const saveData = {
-       userid:this.props.user._id,
-       ...this.state,
-       start_time:this.state.start_time?this.state.start_time.getTime():null,
-       plan_time:this.state.plan_time?this.state.plan_time.getTime():null,
-       state
-    };
 
-    this.props.addOnePlan(saveData);
-  }
 
   handleInfoClick(){
     // console.log('handle click');
@@ -116,83 +96,84 @@ class PlanDetail extends React.Component{
           icon={<Icon type="left" />}
           onLeftClick={this.handleBackClick.bind(this)}
           rightContent={[
-            <Icon  style={{ marginRight: '16px' }} type="ellipsis" key="nav_icon_info"
-              onClick={this.handleInfoClick.bind(this)}/>,
-            <Icon type="check" key="nav_icon_save" onClick={this.handleSaveClick.bind(this)}/>
-          ]}>{ 'A Note' }</NavBar>
+              <span style={{color:'#1F90E6'}} onClick={this.handleSettingClick.bind(this)}>Stetting ></span>
+          ]}>{ 'Plan Detail' }</NavBar>
 
         <div  className="tab_center_coantainer">
 
-          {/* Basic info Section */}
+          {/* Basic info Result */}
           <WhiteSpace size='lg'/>
-          <List>
-            <WingBlank>
-              <InputItem
-                placeholder="Here is the Plan Name"
-                value={this.state.name}
-                onChange={(v)=>{this.handleOnChange('name', v)}}
-              >Plan</InputItem>
+          <Accordion defaultActiveKey="0" >
 
-              <InputItem
-                placeholder="What is the Plan's Target?"
-                value={this.state.target_desc}
-                onChange={(v)=>{this.handleOnChange('target_desc', v)}}
-              >Target</InputItem>
+            <Accordion.Panel header={this.state.state}>
+              <WingBlank>
+                <PlanResult
+                  planState={this.state.state}
+                  titleName={this.state.name}
+                  desc={this.state.desc}
+                  target_desc={this.state.target_desc}
+                />
+              </WingBlank>
+            </Accordion.Panel>
+            <Accordion.Panel header="Operation">
+              <WingBlank>
+                <Button style={{margin:"40px 40px"}}type="primary" size="small">Set Finished</Button>
+              </WingBlank>
+            </Accordion.Panel>
 
+          </Accordion>
 
-              <TextareaItem
-                title="Detail"
-                placeholder="More Details Description"
-                value={this.state.desc}
-                onChange={(v)=>{this.handleOnChange('desc', v)}}
-                rows={3}
-                count={1000}
-              />
+          {/* Basic info Plan's Time info */}
+          <WhiteSpace size='lg'/>
+          <Accordion defaultActiveKey="0" >
+            <Accordion.Panel header="Plan Time Info" className="pad">
+              <WingBlank>
+                <List className="my-list">
+                  <DatePicker
+                    disabled
+                     mode="date"
+                     title="Select Date"
+                     extra="Optional"
+                     value={this.state.start_time}
+                     onChange={(v)=>{this.handleOnChange('start_time', v)}}
+                  ><List.Item arrow="horizontal">Start Time</List.Item>
+                  </DatePicker>
 
-              <Radio.RadioItem key="isPublic" checked={this.state.isPublic} onClick={()=>{this.handleRadioClick(true)}}>
-                Public
-                <List.Item.Brief>Check Here will make This Plan PUBLIC for friends </List.Item.Brief>
-              </Radio.RadioItem>
-              <Radio.RadioItem key="isPrivate" checked={!this.state.isPublic} onClick={()=>{this.handleRadioClick(false)}}>
-                Private
-                <List.Item.Brief>Check Here will make This Plan Private </List.Item.Brief>
-              </Radio.RadioItem>
+                  <DatePicker
+                    disabled
+                     mode="date"
+                     title="Select Date"
+                     extra="Optional"
+                     value={this.state.plan_time}
+                     onChange={(v)=>{this.handleOnChange('plan_time', v)}}
+                  ><List.Item arrow="horizontal">Plan Finish</List.Item>
+                  </DatePicker>
+                </List>
+              </WingBlank>
+              <TimeProgressBar planTime={this.state.plan_time}
+                startTime={this.state.start_time}
+                currentTime={new Date().getTime()}
+                position="normal" />
+            </Accordion.Panel>
 
-              <DatePicker
-                 mode="date"
-                 title="Select Date"
-                 extra="Optional"
-                 value={this.state.start_time}
-                 onChange={(v)=>{this.handleOnChange('start_time', v)}}
-              ><List.Item arrow="horizontal">Start Time</List.Item>
-              </DatePicker>
-
-              <DatePicker
-                 mode="date"
-                 title="Select Date"
-                 extra="Optional"
-                 value={this.state.plan_time}
-                 onChange={(v)=>{this.handleOnChange('plan_time', v)}}
-              ><List.Item arrow="horizontal">Plan Finish</List.Item>
-              </DatePicker>
-
-            </WingBlank>
-          </List>
-
+          </Accordion>
           {/* Stage Section */}
           <WhiteSpace size='lg'/>
 
-          <div style={{background:"white", paddingTop:"10px", paddingBottom:"10px"}}>
-            <WingBlank>
-              <PlanStageSteps
-                stages={this.state.stages}
-              />
-              <WhiteSpace size='lg'/>
-              <Button type="ghost" onClick={()=>{this.setState({modal_add_new_visible:true})}}>New One Step of This Plan</Button>
-              <WhiteSpace size='lg'/>
-            </WingBlank>
-          </div>
-
+          <Accordion defaultActiveKey="0" >
+            <Accordion.Panel>
+              <div style={{background:"white", paddingTop:"10px", paddingBottom:"10px"}}>
+                <WingBlank>
+                  <PlanStageSteps
+                    stages={this.state.stages}
+                  />
+                  <WhiteSpace size='lg'/>
+                  <Button type="ghost" onClick={()=>{this.setState({modal_add_new_visible:true})}}>New One Step of This Plan</Button>
+                  <WhiteSpace size='lg'/>
+                </WingBlank>
+              </div>
+            </Accordion.Panel>
+          </Accordion>
 
         </div>
 

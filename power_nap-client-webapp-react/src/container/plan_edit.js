@@ -1,15 +1,16 @@
 import React from 'react';
 import { Modal, NavBar, Button, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Radio, DatePicker, Steps, Toast } from 'antd-mobile';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
 import AddStageModal from '../component/add_stage_modal/add_stage_modal';
-import { addOnePlan } from '../redux/plans.redux'
+import { addOnePlan, updateOneNote } from '../redux/plans.redux'
 
 /**
  * PlanEdit is for One Plan to Edit
  */
  @connect(
-   state=>state, { addOnePlan }
+   state=>state, { addOnePlan, updateOneNote }
  )
 class PlanEdit extends React.Component{
 
@@ -33,11 +34,10 @@ class PlanEdit extends React.Component{
     const planid = this.props.match.params.planid;
     if ( planid !== 'new') {
       // This means to load old one
-      const theNote = this.props.plans.plans.find(i => i._id === planid );
+      const thePlan = this.props.plans.plans.find(i => i._id === planid );
       // console.log("this.props.notes.notes",this.props.notes.notes);
       this.setState({
-        // title:theNote.title,
-        // content:theNote.content
+        ...thePlan
       });
     }
   }
@@ -50,6 +50,7 @@ class PlanEdit extends React.Component{
     // console.log('s_time', this.state.start_time.getTime());
     // ask if need sart this plan now
     if ( this.props.match.params.planid === 'new'){
+      // new plan
       Modal.alert('Start This Plan Now?', 'Choose Start you will make this Plan a Started State, if you Need to Start It Later, Choose The No,Thanks Button', [
         { text: 'No,Thanks', onPress: () => {
           this.setState({state:'NO_START'});
@@ -61,7 +62,8 @@ class PlanEdit extends React.Component{
         } },
       ]);
     } else {
-
+      // update plan
+      this.updatePlan();
     }
   }
   savePlan(state){
@@ -76,6 +78,20 @@ class PlanEdit extends React.Component{
 
     this.props.addOnePlan(saveData);
   }
+
+  updatePlan(){
+    // post data
+    // Here, we don't need update the plan's state
+    const updateData = {
+       planid:this.props.match.params.planid,
+       ...this.state,
+       start_time:this.state.start_time?this.state.start_time.getTime():null,
+       plan_time:this.state.plan_time?this.state.plan_time.getTime():null,
+    };
+
+    this.props.updateOneNote(updateData);
+  }
+
 
   handleInfoClick(){
     // console.log('handle click');
@@ -132,6 +148,7 @@ class PlanEdit extends React.Component{
 
     return (
       <div>
+        { this.props.plans.okBack? <Redirect to='/plans' />:null}
         <NavBar className="fixed-header" mode="light"
           icon={<Icon type="left" />}
           onLeftClick={this.handleBackClick.bind(this)}

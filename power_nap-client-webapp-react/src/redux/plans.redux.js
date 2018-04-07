@@ -19,13 +19,17 @@ const initState = {
 export function plans(state=initState, action){
   switch (action.type) {
     case ADD_ONE:
-      return {...state, plans:[...state.plans, action.payload]};
+      return {...state, plans:[...state.plans, action.payload], okBack:true};
 
     case DELETE_ONE:
       // Toast.success('Note Saved Success ', 1);
       const index = state.plans.findIndex(i=>i._id === action.deletedPlanId);
       state.plans.splice(index, 1)
       return {...state,  };
+
+    case UPDATE_ONE:
+      Toast.success('Note Saved Success ', 1);
+      return {...state, okBack:true };
 
     case IN_ERROR:
       Toast.fail(action.msg, 2);
@@ -53,6 +57,11 @@ function addOne(data){
 // delete a plan
 function deleteOne(deletedPlanId){
   return {type:DELETE_ONE, deletedPlanId:deletedPlanId};
+}
+
+// update a note
+function updateOne(data){
+  return {type:UPDATE_ONE, payload:data};
 }
 
 // in error
@@ -118,6 +127,25 @@ export function getUserPlansById({ userid }){
       }
     });
   };
+}
+
+// export function update one
+export function updateOneNote({ planid, name, target_desc, desc, isPublic, start_time, plan_time, state }){
+  return dispatch => {
+    axios.post('/plan/update', { planid, name, target_desc, desc, isPublic, start_time, plan_time, state })
+    .then(res=>{
+
+      if (res.status === 200 ) {
+        if (res.data.code === 1){
+          // code 1 means error in response
+          dispatch(inError(res.data.msg));
+        } else {
+          // success
+          dispatch(updateOne(res.data.data));
+        }
+      }
+    });
+  }
 }
 
 // export function delete one

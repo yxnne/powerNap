@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavBar, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Toast } from 'antd-mobile';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { addOneNote, updateOneNote } from '../redux/notes.redux'
 
 /**
@@ -83,6 +84,8 @@ class NoteEdit extends React.Component{
 
     return (
       <div>
+        { this.props.notes.okBack? <Redirect to='/notes' />:null}
+
         <NavBar className="fixed-header" mode="light"
           icon={<Icon type="left" />}
           onLeftClick={this.handleBackClick.bind(this)}
