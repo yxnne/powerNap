@@ -1,5 +1,5 @@
 import React from 'react';
-import { Result, Icon } from 'antd-mobile';
+import { Result } from 'antd-mobile';
 import { PLAN_RESULT_NO_START, PLAN_RESULT_STARTED, PLAN_RESULT_FINISHED } from '../../util/consts';
 import './plan_result.css';
 /**
@@ -13,12 +13,14 @@ class PlanResult extends React.Component{
     // Display the Different Icon
     const stateIcon = (planState) => {
       switch (planState){
-        case PLAN_RESULT_NO_START:
+        case PLAN_RESULT_FINISHED:
           return (<img src={require('./img/result_finish.svg')} className="result_img" alt="" />);
         case PLAN_RESULT_NO_START:
           return (<img src={require('./img/result_not_start.svg')} className="result_img" alt="" />);
         case PLAN_RESULT_STARTED:
           return (<img src={require('./img/result_started.svg')} className="result_img" alt="" />);
+        default:
+          return null;
       }
     };
 

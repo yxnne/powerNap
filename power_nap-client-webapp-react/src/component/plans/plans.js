@@ -12,10 +12,10 @@ import { getUserPlansById, deleteOnePlan, resetRedirectFlag } from '../../redux/
   state=>state, { getUserPlansById, deleteOnePlan, resetRedirectFlag }
 )
 class Plans extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
+  // constructor(props) {
+  //   super(props);
+  //
+  // }
 
   componentDidMount(){
     // find that some times has no data because the userid is not got from server

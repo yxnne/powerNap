@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, NavBar, Button, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Radio, DatePicker, Steps, Toast } from 'antd-mobile';
+import { Modal, NavBar, Button, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Radio, DatePicker } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
@@ -238,6 +238,7 @@ class PlanEdit extends React.Component{
         visible={this.state.modal_add_new_visible}
         onConfirm={this.addOneStep.bind(this)}
         onCancel={this.closeModal.bind(this)}
+        model="edit"
       />
       </div>
     );

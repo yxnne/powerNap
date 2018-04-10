@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps, Button, Flex, WingBlank, TextareaItem } from 'antd-mobile';
+import { Steps, Button, Flex, WingBlank } from 'antd-mobile';
 const Step = Steps.Step;
 /**
  * This is the UI Component For Set The Steps and Stage of A Plan
@@ -9,6 +9,7 @@ class PlanStageSteps extends React.Component{
   render(){
     // Step's Description Section
     // Make Some Button and Text
+
     const stepDescSection = (desc) => {
       return (
         <div>
@@ -16,12 +17,26 @@ class PlanStageSteps extends React.Component{
 
           <Flex>
             <Flex.Item></Flex.Item>
-            <Flex.Item align="end">
-              <Button inline type="primary" size="small" style={{marginRight:"12px"}}>
-              edit</Button>
-              <Button inline type="warning" size="small" style={{marginRight:"12px"}}>
-              delete</Button>
-            </Flex.Item>
+
+              {
+                this.props.model == 'edit' ?
+                (
+                  <Flex.Item align="end">
+                    <Button inline type="primary" size="small" style={{marginRight:"12px"}}>
+                    edit</Button>
+                    <Button inline type="warning" size="small" style={{marginRight:"12px"}}>
+                    delete</Button>
+                  </Flex.Item>
+                ):(
+                  <Flex.Item align="end">
+                    <Button inline type="primary" size="small" style={{marginRight:"12px"}}>
+                    set finish</Button>
+                  </Flex.Item>
+                )
+              }
+
+
+
           </Flex>
         </div>
       );

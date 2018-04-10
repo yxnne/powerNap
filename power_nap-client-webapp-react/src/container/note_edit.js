@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem, Toast } from 'antd-mobile';
+import { NavBar, Icon,  List, InputItem, WhiteSpace, WingBlank, TextareaItem } from 'antd-mobile';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { addOneNote, updateOneNote } from '../redux/notes.redux'

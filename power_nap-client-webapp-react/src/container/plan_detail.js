@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, Result, Modal, NavBar, Button, Icon,  List, WhiteSpace, WingBlank, DatePicker, Toast } from 'antd-mobile';
+import { Accordion, NavBar, Button, Icon,  List, WhiteSpace, WingBlank, DatePicker } from 'antd-mobile';
 import { connect } from 'react-redux';
 import PlanStageSteps from '../component/plan_stage_steps/plan_stage_steps';
 import AddStageModal from '../component/add_stage_modal/add_stage_modal';
@@ -92,6 +92,8 @@ class PlanDetail extends React.Component{
       case PLAN_RESULT_FINISHED:
         this.updatePlan(PLAN_RESULT_STARTED);
         break;
+      default:
+        break;
     }
   }
 
@@ -121,6 +123,8 @@ class PlanDetail extends React.Component{
 
         case PLAN_RESULT_FINISHED:
           return (<Button style={{margin:"40px 40px"}}type="primary" size="small" onClick={()=>this.handleSetPlanStateClick()}>Set Plan Started</Button>);
+        default:
+          return null;
       }
     };
 
@@ -216,6 +220,7 @@ class PlanDetail extends React.Component{
         visible={this.state.modal_add_new_visible}
         onConfirm={this.addOneStep.bind(this)}
         onCancel={this.closeModal.bind(this)}
+        model="show"
       />
       </div>
     );

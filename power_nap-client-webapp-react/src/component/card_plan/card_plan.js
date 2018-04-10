@@ -4,10 +4,6 @@ import TimeProgressBar from '../time_progress_bar/time_progress_bar';
 import { PLAN_RESULT_NO_START, PLAN_RESULT_STARTED, PLAN_RESULT_FINISHED } from '../../util/consts';
 import './card_plan.css';
 
-// Define CONSTs
-const PLAN_STATE_STARTED = 'STARTED';
-const PLAN_STATE_FINSHED = 'FINISHED';
-const PLAN_NO_START = 'NO_START';
 /**
  * This is an UI Component for View an Card of Plan
  */
@@ -130,7 +126,7 @@ class CardPlan extends React.Component {
             content={(
               <span style={{lineHeight:"130%"}}>
                 <span >
-                  <img style={{ width:"18px", marginRight:"12px" }} src={this.props.isPublic?require('./img/open_eye.svg'):require('./img/private_lock.svg')}/>
+                  <img alt="" style={{ width:"18px", marginRight:"12px" }} src={this.props.isPublic?require('./img/open_eye.svg'):require('./img/private_lock.svg')}/>
                 </span>
                 <span >
                   {this.props.footerContent}
