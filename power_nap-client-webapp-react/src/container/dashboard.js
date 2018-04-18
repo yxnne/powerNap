@@ -53,6 +53,10 @@ class Dashboard extends React.Component{
 
     // make the page info to display according to the pathname
     const pageInfoObj = pageList.find(item=>item.path === pathname);
+    if (!pageInfoObj){
+      this.props.history.push('/plans');
+    }
+
     const pageTitle = pageInfoObj && pageInfoObj.title?pageInfoObj.title:null;
     const navRightTools = pageInfoObj && pageInfoObj.needNavTool?[
       <Icon key="0" type="search" style={{ marginRight: '16px' }} />,

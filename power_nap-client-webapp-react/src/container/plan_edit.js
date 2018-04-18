@@ -223,6 +223,7 @@ class PlanEdit extends React.Component{
             <WingBlank>
               <PlanStageSteps
                 stages={this.state.stages}
+                model="edit"
               />
               <WhiteSpace size='lg'/>
               <Button type="ghost" onClick={()=>{this.setState({modal_add_new_visible:true})}}>New One Step of This Plan</Button>
@@ -238,7 +239,7 @@ class PlanEdit extends React.Component{
         visible={this.state.modal_add_new_visible}
         onConfirm={this.addOneStep.bind(this)}
         onCancel={this.closeModal.bind(this)}
-        model="edit"
+
       />
       </div>
     );

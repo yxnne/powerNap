@@ -204,6 +204,7 @@ class PlanDetail extends React.Component{
                 <WingBlank>
                   <PlanStageSteps
                     stages={this.state.stages}
+                    model="show"
                   />
                   <WhiteSpace size='lg'/>
                   <Button type="ghost" onClick={()=>{this.setState({modal_add_new_visible:true})}}>New One Step of This Plan</Button>
@@ -220,7 +221,7 @@ class PlanDetail extends React.Component{
         visible={this.state.modal_add_new_visible}
         onConfirm={this.addOneStep.bind(this)}
         onCancel={this.closeModal.bind(this)}
-        model="show"
+
       />
       </div>
     );
